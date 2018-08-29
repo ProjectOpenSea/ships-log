@@ -1,0 +1,13 @@
+.next
+.idea
+node_modules
+bundle.js
+*.iml
+geth.log
+dist/
+firebase-debug.log
+newrelic_agent.log
+.env
+*.DS_Store
+.node-xmlhttprequest*
+.*.swp

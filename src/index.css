@@ -1,0 +1,12 @@
+body {
+  font-family: Rubik, "Avenir Next", sans-serif;
+  color: rgb(87, 87, 87);
+  background-color: white;
+}
+h1, h2, h3 {
+  color: black;
+}
+
+a {
+  color: #65acef;
+}
