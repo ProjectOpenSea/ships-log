@@ -1,35 +1,50 @@
 import React from 'react';
-// import { OpenSeaSDK } from 'opensea-js';
+import PropTypes from 'prop-types';
+import Order from '../Order';
 
 export default class Log extends React.Component {
+  static propTypes = {
+    seaport: PropTypes.object.isRequired
+  };
+
   state = {
-    assets: [],
+    orders: [],
+    total: 0,
+    page: 1
   };
 
   componentDidMount() {
-    this.getAssets();
+    this.fetchData();
   }
 
-  getAssets() {
-    // axios
-    //   .get('https://api.opensea.io/api/v1/events/?event_type=successful&asset_contract_address=0x06012c8cf97bead5deae237070f9587f8e7a266d')
-    //   .then((response) => {
-    //     this.setState({ events: response.data.asset_events });
-    //   })
-    //   .catch(err => new Error(err));
+  async fetchData() {
+    const { orders, count } = await this.props.seaport.api.getOrders({
+      // Possible query options:
+      // 'asset_contract_address
+      // 'maker'
+      // 'taker'
+      // 'owner'
+      // 'token_id'
+      // 'token_ids'
+      // 'side'
+    }, this.state.page)
+
+    // const tokenIdsWithDups = orders.map(o => o.asset.id)
+
+    // const { assets, count } = await this.props.seaport.api.getAssets({
+    //   token_ids: tokenIdsWithDups
+    // })
+
+    this.setState({ orders, total: count })
   }
 
   render() {
-    const { assets } = this.state;
+    const { orders } = this.state;
 
     return (
       <div className="container py-3">
-        {assets.length > 0
-          ? assets.map((asset, i) => (
-              <div key={i}>
-                {asset.name}
-              </div>
-            ))
+        {orders.length > 0
+          ? orders.map((order, i) => <Order key={i} order={order} />)
           : <div className="text-center">Loading...</div>
         }
       </div>
