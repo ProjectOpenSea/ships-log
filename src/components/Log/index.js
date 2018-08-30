@@ -4,7 +4,8 @@ import Order from '../Order';
 
 export default class Log extends React.Component {
   static propTypes = {
-    seaport: PropTypes.object.isRequired
+    seaport: PropTypes.object.isRequired,
+    accountAddress: PropTypes.string
   };
 
   state = {
@@ -43,10 +44,12 @@ export default class Log extends React.Component {
 
     return (
       <div className="container py-3">
-        {orders.length > 0
-          ? orders.map((order, i) => <Order key={i} order={order} />)
-          : <div className="text-center">Loading...</div>
-        }
+        <div className="card-deck">
+          {orders.length > 0
+            ? orders.map((order, i) => <Order {...this.props} key={i} order={order}  />)
+            : <div className="text-center">Loading...</div>
+          }
+        </div>
       </div>
     );
   }

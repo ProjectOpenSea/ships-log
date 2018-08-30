@@ -19,10 +19,9 @@ export default class Account extends React.Component {
     const { account, showImage } = this.props;
     const _username = account.user
       ? account.user.username
-      : null
-    const _address = account.address
-
-    const displayName = _username ? _username : _address.substring(2, MAX_ADDR_LEN + 2).toUpperCase()
+      : null;
+    const _address = account.address;
+    const displayName = _username ? _username : _address.substring(2, MAX_ADDR_LEN + 2).toUpperCase();
 
     return (
       <a target="_blank" href={`${OPENSEA_URL}/accounts/${_address}`}>
