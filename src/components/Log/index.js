@@ -21,7 +21,7 @@ export default class Log extends React.Component {
   async fetchData() {
     const { orders, count } = await this.props.seaport.api.getOrders({
       // Possible query options:
-      // 'asset_contract_address
+      'asset_contract_address': '0xf766b3e7073f5a6483e27de20ea6f59b30b28f87'
       // 'maker'
       // 'taker'
       // 'owner'
