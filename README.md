@@ -29,6 +29,8 @@ npm run build
 
 ### Deploying to Heroku
 
+The create-react-app buildpack has issues finding dependencies during the build phase. To work around those, you can do `npm run eject` and deploy a node app, or you can deploy a pure, static site:
+
 ```bash
 heroku create -b https://github.com/heroku/heroku-buildpack-static.git
 npm run build

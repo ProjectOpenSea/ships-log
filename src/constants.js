@@ -6,6 +6,10 @@ export const web3Provider = typeof web3 !== 'undefined'
   : new Web3.providers.HttpProvider('https://mainnet.infura.io')
 export const web3Singleton = new Web3(web3Provider)
 
+export function fromWei(wei) {
+  return +(web3Singleton.fromWei(wei))
+}
+
 export async function promisify(inner) {
   return new Promise((resolve, reject) =>
     inner((err, res) => {

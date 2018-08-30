@@ -3,7 +3,7 @@ import moment from 'moment'
 import PropTypes from 'prop-types'
 import Account from '../Account'
 import styled from 'styled-components';
-import { web3Singleton } from '../../constants';
+import { fromWei } from '../../constants';
 import { OrderSide } from 'opensea-js/lib/types';
 
 const Card = styled.div.attrs({ className: "card mx-2 mb-4" })`
@@ -33,7 +33,7 @@ export default class Order extends React.Component {
   renderBuyButton() {
     const { accountAddress } = this.props
     const { currentPrice } = this.props.order
-    const priceLabel = web3Singleton.fromWei(currentPrice).toFixed(3)
+    const priceLabel = fromWei(currentPrice).toFixed(3)
     const buyAsset = async () => {
       await this.props.seaport.fulfillOrder({ order: this.props.order, accountAddress })
     }
@@ -48,7 +48,7 @@ export default class Order extends React.Component {
   renderAcceptOfferButton(canAccept = true) {
     const { accountAddress } = this.props
     const { currentPrice } = this.props.order
-    const priceLabel = web3Singleton.fromWei(currentPrice).toFixed(3)
+    const priceLabel = fromWei(currentPrice).toFixed(3)
     const btnClass = canAccept ? "btn-success" : "btn-warning"
     const sellAsset = async () => {
       if (!canAccept) {
