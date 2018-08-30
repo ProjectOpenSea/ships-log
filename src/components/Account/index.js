@@ -24,7 +24,7 @@ export default class Account extends React.Component {
     const displayName = _username ? _username : _address.substring(2, MAX_ADDR_LEN + 2).toUpperCase();
 
     return (
-      <a target="_blank" href={`${OPENSEA_URL}/accounts/${_address}`}>
+      <a target="_blank" rel="noopener noreferrer" href={`${OPENSEA_URL}/accounts/${_address}`}>
         {showImage && account
           ? <div style={{backgroundImage:'url("'+account.image+'")'}} />
           : null
