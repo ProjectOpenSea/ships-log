@@ -43,9 +43,5 @@
       "not op_mini all",
       "ie 11"
     ]
-  },
-  "engines": {
-    "node": "10.8.x",
-    "npm": "6.2.x"
   }
 }
