@@ -11,14 +11,28 @@ Check out a live version of this example [here](https://ships-log.herokuapp.com)
 ### Instructions
 
 To install dependencies:
-```JavaScript
+```bash
 npm install
 ```
 
 To run the app on localhost:
 
-```JavaScript
+```bash
 npm start
+```
+
+To minify and create a production build:
+
+```bash
+npm run build
+```
+
+### Deploying to Heroku
+
+```bash
+heroku create -b https://github.com/heroku/heroku-buildpack-static.git
+npm run build
+git push heroku master
 ```
 
 ### Directory structure
