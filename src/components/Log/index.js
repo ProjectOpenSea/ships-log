@@ -39,17 +39,47 @@ export default class Log extends React.Component {
     this.setState({ orders, total: count })
   }
 
+  paginateTo(page) {
+    this.setState({ orders: [], page }, () => this.fetchData())
+  }
+
+  renderPagination() {
+    return (
+      <nav>
+        <ul className="pagination justify-content-center">
+          <li className={"page-item " + (this.state.page == 1 ? "disabled" : "")}>
+            <a className="page-link" href="#"
+              onClick={() => this.paginateTo(this.state.page - 1)} tabindex="-1">
+              Previous
+            </a>
+          </li>
+          <li className="page-item">
+            <a className="page-link" href="#"
+              onClick={() => this.paginateTo(this.state.page + 1)}>
+              Next
+            </a>
+          </li>
+        </ul>
+      </nav>
+    )
+  }
+
   render() {
     const { orders } = this.state;
 
     return (
       <div className="container py-3">
-        <div className="card-deck">
-          {orders.length > 0
-            ? orders.map((order, i) => <Order {...this.props} key={i} order={order}  />)
-            : <div className="text-center">Loading...</div>
-          }
-        </div>
+        {orders.length > 0
+          ? <React.Fragment>
+              <div className="card-deck">
+                {orders.map((order, i) => {
+                  return <Order {...this.props} key={i} order={order}  />
+                })}
+              </div>
+              {this.renderPagination()}
+            </React.Fragment>
+          : <div className="text-center">Loading...</div>
+        }
       </div>
     );
   }

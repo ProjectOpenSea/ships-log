@@ -2,13 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import Log from '../Log'
 import { OpenSeaPort, Network } from 'opensea-js';
-import { web3Provider } from '../../constants';
+import { web3Provider, OPENSEA_JS_URL } from '../../constants';
 
 const Header = styled.header`
   border-bottom: 1px solid lightgrey;
   padding: 10px;
   text-align: center;
   background-color: #f4f9fd;
+
+  h6 img {
+    width: 24px;
+  }
 `
 
 export default class App extends React.Component {
@@ -37,8 +41,14 @@ export default class App extends React.Component {
     return (
       <div>
         <Header>
-          <h1>The Ship's Log</h1>
-          <h6>OpenSea.js example dapp</h6>
+          <h1>
+            The Ship's Log
+          </h1>
+          <h6>
+            <a target="_blank" rel="noopener noreferrer" href={OPENSEA_JS_URL}>
+              <img alt="OpenSea logo" className="mr-2" src="/opensea-logo.png" />OpenSea.js
+            </a> example dapp
+          </h6>
         </Header>
         <main>
           <Log
