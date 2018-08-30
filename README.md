@@ -1,10 +1,10 @@
 ## The OpenSea Ship's Log
 
-A page listing recent auctions and bids on OpenSea, with the ability to buy items on sale right from the page. **Uses only ___ lines of code!**
+A page listing recent auctions and bids on OpenSea, with the ability to buy items on sale right from the page.
 
 ### Demo
 
-Check out a live version of this example here.
+Check out a live version of this example [here](https://ships-log.herokuapp.com).
 
 ### Instructions
 

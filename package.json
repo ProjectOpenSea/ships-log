@@ -12,6 +12,7 @@
   "author": "Alex Atallah <alex.atallah@opensea.io>",
   "dependencies": {
     "babel-eslint": "^7.2.3",
+    "bignumber.js": "^4.0.4",
     "bootstrap": "^4.1.3",
     "eslint-config-airbnb": "^17.0.0",
     "moment": "^2.22.2",

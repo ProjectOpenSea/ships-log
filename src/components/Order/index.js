@@ -119,13 +119,13 @@ export default class Order extends React.Component {
                 {errorMessage}
               </div>
             : <li className="list-group-item">
-                {order.side == OrderSide.Buy
+                {order.side === OrderSide.Buy
                   ? isOwner
                     ? this.renderAcceptOfferButton()
                     : this.renderAcceptOfferButton(false)
                   : null
                 }
-                {!isOwner && order.side == OrderSide.Sell
+                {!isOwner && order.side === OrderSide.Sell
                   ? this.renderBuyButton()
                   : null
                 }
