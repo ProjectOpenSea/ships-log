@@ -2,7 +2,6 @@ import React from 'react'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 import Account from '../Account'
-import { OPENSEA_URL } from '../../constants';
 
 export default class Order extends React.Component {
 
