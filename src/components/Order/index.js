@@ -49,7 +49,6 @@ export default class Order extends React.Component {
     const { accountAddress } = this.props
     const { currentPrice } = this.props.order
     const priceLabel = fromWei(currentPrice).toFixed(3)
-    const btnClass = canAccept ? "btn-success" : "btn-warning"
     const sellAsset = async () => {
       if (!canAccept) {
         this.setState({
@@ -62,7 +61,7 @@ export default class Order extends React.Component {
     return (
       <button
         onClick={sellAsset}
-        className={`btn ${btnClass} w-100`}>Sell for Ξ{priceLabel}
+        className={`btn btn-success w-100`}>Sell for Ξ{priceLabel}
       </button>
     )
   }
