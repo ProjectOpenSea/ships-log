@@ -31,6 +31,14 @@ export default class Order extends React.Component {
     accountAddress: PropTypes.string
   }
 
+  onError(error) {
+    // Ideally, you'd handle this error at a higher-level component
+    // using props or Redux
+    this.setState({ errorMessage: error.message })
+    setTimeout(() => this.setState({errorMessage: null}), 3000)
+    throw error
+  }
+
   async fulfillOrder() {
     const { order, accountAddress } = this.props
     if (!accountAddress) {
@@ -40,8 +48,7 @@ export default class Order extends React.Component {
       this.setState({ creatingOrder: true })
       await this.props.seaport.fulfillOrder({ order, accountAddress })
     } catch(error) {
-      // Handle error here
-      throw error
+      this.onError(error)
     } finally {
       this.setState({ creatingOrder: false })
     }
