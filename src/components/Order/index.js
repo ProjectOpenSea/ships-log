@@ -18,7 +18,8 @@ const Card = styled.div.attrs({ className: "card mx-2 mb-4" })`
 export default class Order extends React.Component {
 
   state = {
-    errorMessage: null
+    errorMessage: null,
+    creatingOrder: false
   }
 
   static propTypes = {
@@ -30,38 +31,57 @@ export default class Order extends React.Component {
     accountAddress: PropTypes.string
   }
 
+  async fulfillOrder() {
+    const { order, accountAddress } = this.props
+    if (!accountAddress) {
+      return alert('You need an Ethereum wallet to interact with this marketplace. Unlock your wallet, get MetaMask.io on desktop, or get Trust Wallet or Coinbase Wallet on mobile.')
+    }
+    try {
+      this.setState({ creatingOrder: true })
+      await this.props.seaport.fulfillOrder({ order, accountAddress })
+    } catch(error) {
+      // Handle error here
+      throw error
+    } finally {
+      this.setState({ creatingOrder: false })
+    }
+  }
+
   renderBuyButton() {
-    const { accountAddress } = this.props
+    const { creatingOrder } = this.state
     const { currentPrice } = this.props.order
     const priceLabel = fromWei(currentPrice).toFixed(3)
     const buyAsset = async () => {
-      await this.props.seaport.fulfillOrder({ order: this.props.order, accountAddress })
+      this.fulfillOrder()
     }
     return (
       <button
+        disabled={creatingOrder}
         onClick={buyAsset}
-        className="btn btn-primary w-100">Buy for Ξ{priceLabel}
+        className="btn btn-primary w-100">Buy{creatingOrder ? "ing" : ""} for Ξ{priceLabel}
       </button>
     )
   }
 
   renderAcceptOfferButton(canAccept = true) {
+    const { creatingOrder } = this.state
     const { accountAddress } = this.props
     const { currentPrice } = this.props.order
     const priceLabel = fromWei(currentPrice).toFixed(3)
     const sellAsset = async () => {
-      if (!canAccept) {
+      if (accountAddress && !canAccept) {
         this.setState({
           errorMessage: "You do not own this asset!"
         })
         return
       }
-      await this.props.seaport.fulfillOrder({ order: this.props.order, accountAddress })
+      this.fulfillOrder()
     }
     return (
       <button
+        disabled={creatingOrder}
         onClick={sellAsset}
-        className={`btn btn-success w-100`}>Sell for Ξ{priceLabel}
+        className={`btn btn-success w-100`}>Sell{creatingOrder ? "ing" : ""} for Ξ{priceLabel}
       </button>
     )
   }
