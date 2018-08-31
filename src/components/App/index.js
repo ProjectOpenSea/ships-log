@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Log from '../Log'
 import { OpenSeaPort, Network } from 'opensea-js';
-import { web3Provider, OPENSEA_JS_URL } from '../../constants';
+import { web3Provider, OPENSEA_JS_URL, GITHUB_URL } from '../../constants';
 
 const Header = styled.header`
   border-bottom: 1px solid lightgrey;
@@ -12,6 +12,18 @@ const Header = styled.header`
 
   h6 img {
     width: 24px;
+  }
+`
+
+const ImgRibbon = styled.img`
+  width: 150px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+
+  @media(max-width: 600px) {
+    width: 80px;
   }
 `
 
@@ -40,6 +52,9 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
+        <a href={GITHUB_URL}>
+          <ImgRibbon src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" />
+        </a>
         <Header>
           <h1>
             The Ship's Log
