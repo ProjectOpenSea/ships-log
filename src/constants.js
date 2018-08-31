@@ -13,6 +13,8 @@ export function fromWei(wei) {
   return +(web3Singleton.fromWei(wei))
 }
 
+export const NO_WALLET_ALERT = 'You need an Ethereum wallet to interact with this marketplace. Unlock your wallet, get MetaMask.io on desktop, or get Trust Wallet or Coinbase Wallet on mobile.'
+
 export async function promisify(inner) {
   return new Promise((resolve, reject) =>
     inner((err, res) => {

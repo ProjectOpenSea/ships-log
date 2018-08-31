@@ -3,7 +3,7 @@ import moment from 'moment'
 import PropTypes from 'prop-types'
 import Account from '../Account'
 import styled from 'styled-components';
-import { fromWei } from '../../constants';
+import { fromWei, NO_WALLET_ALERT } from '../../constants';
 import { OrderSide } from 'opensea-js/lib/types';
 
 const Card = styled.div.attrs({ className: "card mx-2 mb-4" })`
@@ -42,7 +42,7 @@ export default class Order extends React.Component {
   async fulfillOrder() {
     const { order, accountAddress } = this.props
     if (!accountAddress) {
-      return alert('You need an Ethereum wallet to interact with this marketplace. Unlock your wallet, get MetaMask.io on desktop, or get Trust Wallet or Coinbase Wallet on mobile.')
+      return alert(NO_WALLET_ALERT)
     }
     try {
       this.setState({ creatingOrder: true })
