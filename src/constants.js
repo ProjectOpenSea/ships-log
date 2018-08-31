@@ -1,5 +1,6 @@
 import * as Web3 from 'web3';
 
+export const GOOGLE_ANALYTICS_ID = 'UA-111688253-4'
 export const OPENSEA_URL = "https://opensea.io"
 export const OPENSEA_JS_URL = "https://github.com/ProjectOpenSea/opensea-js"
 export const GITHUB_URL = "https://github.com/ProjectOpenSea/ships-log"
