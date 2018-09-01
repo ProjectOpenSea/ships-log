@@ -49,7 +49,11 @@ export default class Log extends React.Component {
     if (this.state.side === side) {
       side = undefined
     }
-    this.setState({ orders: [], side }, () => this.fetchData())
+    this.setState({
+      orders: [],
+      side,
+      onlyForMe: undefined
+    }, () => this.fetchData())
   }
 
   toggleForMe() {

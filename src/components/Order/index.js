@@ -54,11 +54,18 @@ export default class Order extends React.Component {
     }
   }
 
-  renderBuyButton() {
+  renderBuyButton(canAccept = true) {
     const { creatingOrder } = this.state
+    const { accountAddress } = this.props
     const { currentPrice } = this.props.order
     const priceLabel = fromWei(currentPrice).toFixed(3)
     const buyAsset = async () => {
+      if (accountAddress && !canAccept) {
+        this.setState({
+          errorMessage: "You already own this asset!"
+        })
+        return
+      }
       this.fulfillOrder()
     }
     return (
@@ -146,13 +153,11 @@ export default class Order extends React.Component {
               </div>
             : <li className="list-group-item">
                 {order.side === OrderSide.Buy
-                  ? isOwner
-                    ? this.renderAcceptOfferButton()
-                    : this.renderAcceptOfferButton(false)
+                  ? this.renderAcceptOfferButton(isOwner)
                   : null
                 }
-                {!isOwner && order.side === OrderSide.Sell
-                  ? this.renderBuyButton()
+                {order.side === OrderSide.Sell
+                  ? this.renderBuyButton(!isOwner)
                   : null
                 }
               </li>
