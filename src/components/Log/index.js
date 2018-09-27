@@ -16,6 +16,7 @@ export default class Log extends React.Component {
     side: undefined,
     onlyForMe: false,
     onlyByMe: false,
+    onlyBundles: false,
     page: 1
   };
 
@@ -28,7 +29,8 @@ export default class Log extends React.Component {
     const { orders, count } = await this.props.seaport.api.getOrders({
       maker: this.state.onlyByMe ? accountAddress : undefined,
       owner: this.state.onlyForMe ? accountAddress : undefined,
-      side: this.state.side
+      side: this.state.side,
+      bundled: this.state.onlyBundles ? true : undefined
       // Possible query options:
       // 'asset_contract_address'
       // 'taker'
@@ -71,6 +73,17 @@ export default class Log extends React.Component {
     }, () => this.fetchData())
   }
 
+  toggleBundles() {
+    const { onlyBundles } = this.state
+    this.setState( {
+      orders: [],
+      onlyBundles: !onlyBundles,
+      onlyByMe: false,
+      // Only sell-side for now
+      side: OrderSide.Sell,
+    }, () => this.fetchData())
+  }
+
   toggleByMe() {
     const { accountAddress } = this.props
     if (!accountAddress) {
@@ -109,7 +122,7 @@ export default class Log extends React.Component {
   }
 
   renderFilters() {
-    const { onlyByMe, onlyForMe } = this.state
+    const { onlyByMe, onlyForMe, onlyBundles } = this.state
     const sellSide = this.state.side === OrderSide.Sell
     const buySide = this.state.side === OrderSide.Buy
 
@@ -119,7 +132,7 @@ export default class Log extends React.Component {
           Filter orderbook:
           <div className="btn-group ml-4" role="group">
             <button type="button" className={"btn btn-outline-primary " + (sellSide ? "active" : "")} data-toggle="button" onClick={() => this.toggleSide(OrderSide.Sell)}>
-              Sales
+              Auctions
             </button>
             <button type="button" className={"btn btn-outline-success " + (buySide ? "active" : "")} data-toggle="button" onClick={() => this.toggleSide(OrderSide.Buy)}>
               Bids
@@ -135,6 +148,11 @@ export default class Log extends React.Component {
               By Me
             </button>
           </div>
+        </div>
+        <div className="mb-3 ml-4">
+          <button type="button" className={"btn btn-outline-info " + (onlyBundles ? "active" : "")} data-toggle="button" onClick={() => this.toggleBundles()}>
+            Bundles
+          </button>
         </div>
       </div>
     )

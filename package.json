@@ -19,7 +19,7 @@
     "bootstrap": "^4.1.3",
     "eslint-config-airbnb": "^17.0.0",
     "moment": "^2.22.2",
-    "opensea-js": "^0.2.4",
+    "opensea-js": "^0.2.10",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",

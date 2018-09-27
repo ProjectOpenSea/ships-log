@@ -2,6 +2,8 @@ import React from 'react'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 import Account from '../Account'
+import AssetMetadata from './AssetMetadata'
+import BundleMetadata from './BundleMetadata'
 import styled from 'styled-components';
 import { fromWei, NO_WALLET_ALERT } from '../../constants';
 import { OrderSide } from 'opensea-js/lib/types';
@@ -9,9 +11,12 @@ import { OrderSide } from 'opensea-js/lib/types';
 const Card = styled.div.attrs({ className: "card mx-2 mb-4" })`
   min-width: 200px;
   img {
-    display: block;
     height: 120px;
     max-width: 100%;
+  }
+  img.small {
+    max-width: 50%;
+    height: 60px;
   }
 `
 
@@ -121,27 +126,19 @@ export default class Order extends React.Component {
   render() {
     const { errorMessage } = this.state
     const { order, accountAddress } = this.props
-    const { makerAccount, listingTime, asset } = order
+    const { makerAccount, listingTime, asset, assetBundle } = order
 
     const ts = listingTime.toNumber() * 1000
     const timeLabel = moment(ts).local().fromNow()
-    const isOwner = accountAddress && accountAddress.toLowerCase() === asset.owner.address.toLowerCase()
+    const isOwner = accountAddress && accountAddress.toLowerCase() === makerAccount.address.toLowerCase()
 
     return (
       <Card>
-        <a target="_blank" rel="noopener noreferrer" className="d-inline-block m-100" href={asset.openseaLink}>
-          <img
-            className="mx-auto"
-            alt="Asset artwork"
-            src={asset.imageUrl} />
-        </a>
-          
-        <div className="card-body h-25">
-          <h5 className="card-title">{asset.name}</h5>
-          <p className="card-text text-truncate">
-            <a target="_blank" rel="noopener noreferrer" href={asset.openseaLink} className="card-link">{asset.assetContract.name} #{asset.tokenId}</a>
-          </p>
-        </div>
+        
+        {asset
+          ? <AssetMetadata asset={asset} />
+          : <BundleMetadata bundle={assetBundle} />
+        }
         
         <ul className="list-group list-group-flush">
           <li className="list-group-item">
