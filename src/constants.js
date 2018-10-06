@@ -10,7 +10,7 @@ export const web3Provider = typeof web3 !== 'undefined'
 export const web3Singleton = new Web3(web3Provider)
 
 export function fromWei(wei) {
-  return +(web3Singleton.fromWei(wei))
+  return +(web3Singleton.utils.fromWei(wei.toString()))
 }
 
 export const NO_WALLET_ALERT = 'You need an Ethereum wallet to interact with this marketplace. Unlock your wallet, get MetaMask.io on desktop, or get Trust Wallet or Coinbase Wallet on mobile.'

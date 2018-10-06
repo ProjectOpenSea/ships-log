@@ -130,7 +130,7 @@ export default class Order extends React.Component {
 
     const ts = listingTime.toNumber() * 1000
     const timeLabel = moment(ts).local().fromNow()
-    const isOwner = accountAddress && accountAddress.toLowerCase() === makerAccount.address.toLowerCase()
+    const isOwner = accountAddress && accountAddress.toLowerCase() === asset.owner.address.toLowerCase()
 
     return (
       <Card>
