@@ -128,9 +128,13 @@ export default class Order extends React.Component {
     const { order, accountAddress } = this.props
     const { makerAccount, listingTime, asset, assetBundle } = order
 
+    const owner = asset
+      ? asset.owner
+      : assetBundle.assets[0].owner
+
     const ts = listingTime.toNumber() * 1000
     const timeLabel = moment(ts).local().fromNow()
-    const isOwner = accountAddress && accountAddress.toLowerCase() === asset.owner.address.toLowerCase()
+    const isOwner = accountAddress && accountAddress.toLowerCase() === owner.address.toLowerCase()
 
     return (
       <Card>
