@@ -9,13 +9,13 @@ export default class BundleMetadata extends React.Component {
       <React.Fragment>
         <a target="_blank" rel="noopener noreferrer" className="text-center d-inline-block m-100" href={bundle.permalink}>
           <DivImgWrapper>
-            {bundle.assets.map((asset, i) => (
+            {bundle.assets.map((asset, i) =>
               <img
                 className="small"
                 alt="Asset Bundle artwork"
                 key={i}
-                src={asset.imageUrl} />
-            ))}
+                src={asset.imageUrlThumbnail || asset.imageUrl} />
+            )}
           </DivImgWrapper>
         </a>
           

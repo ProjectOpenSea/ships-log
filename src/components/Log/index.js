@@ -11,7 +11,7 @@ export default class Log extends React.Component {
   };
 
   state = {
-    orders: [],
+    orders: undefined,
     total: 0,
     side: undefined,
     onlyForMe: false,
@@ -44,7 +44,7 @@ export default class Log extends React.Component {
   }
 
   paginateTo(page) {
-    this.setState({ orders: [], page }, () => this.fetchData())
+    this.setState({ orders: undefined, page }, () => this.fetchData())
   }
 
   toggleSide(side) {
@@ -52,7 +52,7 @@ export default class Log extends React.Component {
       side = undefined
     }
     this.setState({
-      orders: [],
+      orders: undefined,
       side,
       onlyForMe: undefined
     }, () => this.fetchData())
@@ -65,7 +65,7 @@ export default class Log extends React.Component {
     }
     const { onlyForMe } = this.state
     this.setState( {
-      orders: [],
+      orders: undefined,
       onlyForMe: !onlyForMe,
       onlyByMe: false,
       // Doesn't make sense to show sell orders the user makes
@@ -76,7 +76,7 @@ export default class Log extends React.Component {
   toggleBundles() {
     const { onlyBundles } = this.state
     this.setState( {
-      orders: [],
+      orders: undefined,
       onlyBundles: !onlyBundles,
       onlyByMe: false,
       // Only sell-side for now
@@ -91,7 +91,7 @@ export default class Log extends React.Component {
     }
     const { onlyByMe } = this.state
     this.setState( {
-      orders: [],
+      orders: undefined,
       onlyByMe: !onlyByMe,
       onlyForMe: false
     }, () => this.fetchData())
@@ -166,7 +166,7 @@ export default class Log extends React.Component {
 
         {this.renderFilters()}
 
-        {orders.length > 0
+        {orders != null
         
           ? <React.Fragment>
               <div className="card-deck">
