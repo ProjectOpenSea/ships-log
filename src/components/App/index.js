@@ -36,7 +36,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.seaport = new OpenSeaPort(web3Provider, {
-      network: Network.Main
+      networkName: Network.Main
     })
     this.web3 = this.seaport.web3
   }
