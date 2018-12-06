@@ -5,8 +5,9 @@ import Account from '../Account'
 import AssetMetadata from './AssetMetadata'
 import BundleMetadata from './BundleMetadata'
 import styled from 'styled-components';
-import { fromWei, NO_WALLET_ALERT } from '../../constants';
+import { NO_WALLET_ALERT } from '../../constants';
 import { OrderSide } from 'opensea-js/lib/types';
+import SalePrice from '../common/SalePrice';
 
 const Card = styled.div.attrs({ className: "card mx-2 mb-4" })`
   min-width: 200px;
@@ -61,9 +62,7 @@ export default class Order extends React.Component {
 
   renderBuyButton(canAccept = true) {
     const { creatingOrder } = this.state
-    const { accountAddress } = this.props
-    const { currentPrice } = this.props.order
-    const priceLabel = fromWei(currentPrice).toFixed(3)
+    const { accountAddress, order } = this.props
     const buyAsset = async () => {
       if (accountAddress && !canAccept) {
         this.setState({
@@ -77,16 +76,18 @@ export default class Order extends React.Component {
       <button
         disabled={creatingOrder}
         onClick={buyAsset}
-        className="btn btn-primary w-100">Buy{creatingOrder ? "ing" : ""} for Ξ{priceLabel}
+        className="btn btn-primary w-100">
+        
+        Buy{creatingOrder ? "ing" : ""} for <SalePrice order={order} />
+
       </button>
     )
   }
 
   renderAcceptOfferButton(canAccept = true) {
     const { creatingOrder } = this.state
-    const { accountAddress } = this.props
-    const { currentPrice } = this.props.order
-    const priceLabel = fromWei(currentPrice).toFixed(3)
+    const { accountAddress, order } = this.props
+    
     const sellAsset = async () => {
       if (accountAddress && !canAccept) {
         this.setState({
@@ -100,7 +101,10 @@ export default class Order extends React.Component {
       <button
         disabled={creatingOrder}
         onClick={sellAsset}
-        className={`btn btn-success w-100`}>Sell{creatingOrder ? "ing" : ""} for Ξ{priceLabel}
+        className={`btn btn-success w-100`}>
+
+        Sell{creatingOrder ? "ing" : ""} for <SalePrice order={order} />
+
       </button>
     )
   }
