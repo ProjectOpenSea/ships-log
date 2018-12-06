@@ -10,7 +10,9 @@ Check out a live version of this example [here](https://ships-log.herokuapp.com)
 
 ### Instructions
 
-To install dependencies:
+Execute `nvm use`, if you have Node Version Manager, or install Node.js version 8.11 to make sure dependencies work.
+
+Then, to install dependencies:
 ```bash
 npm install
 ```
