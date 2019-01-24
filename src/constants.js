@@ -1,5 +1,5 @@
-import * as Web3 from 'web3';
 import BigNumber from 'bignumber.js';
+import { PortisProvider } from 'portis';
 
 export const GOOGLE_ANALYTICS_ID = 'UA-111688253-4'
 export const OPENSEA_URL = "https://opensea.io"
@@ -8,7 +8,7 @@ export const GITHUB_URL = "https://github.com/ProjectOpenSea/ships-log"
 export const DEFAULT_DECIMALS = 18
 export const web3Provider = typeof web3 !== 'undefined'
   ? window.web3.currentProvider
-  : new Web3.providers.HttpProvider('https://mainnet.infura.io')
+  : new PortisProvider({});
 
 export function toUnitAmount(baseAmount, tokenContract = null) {
   const decimals = tokenContract && tokenContract.decimals != null
@@ -23,7 +23,7 @@ export function toBaseUnitAmount(unitAmount, tokenContract = null) {
   const decimals = tokenContract && tokenContract.decimals != null
     ? tokenContract.decimals
     : DEFAULT_DECIMALS
-  
+
   const amountBN = new BigNumber(unitAmount.toString())
   return amountBN.times(new BigNumber(10).pow(decimals))
 }
