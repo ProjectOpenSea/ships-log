@@ -5,7 +5,7 @@ import Account from '../Account'
 import AssetMetadata from './AssetMetadata'
 import BundleMetadata from './BundleMetadata'
 import styled from 'styled-components';
-import { NO_WALLET_ALERT } from '../../constants';
+import { connectWallet } from '../../constants';
 import { OrderSide } from 'opensea-js/lib/types';
 import SalePrice from '../common/SalePrice';
 
@@ -48,7 +48,7 @@ export default class Order extends React.Component {
   async fulfillOrder() {
     const { order, accountAddress } = this.props
     if (!accountAddress) {
-      return alert(NO_WALLET_ALERT)
+      await connectWallet()
     }
     try {
       this.setState({ creatingOrder: true })

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Order from '../Order';
 import { OrderSide } from 'opensea-js/lib/types';
-import { NO_WALLET_ALERT } from '../../constants';
+import { connectWallet } from '../../constants';
 
 export default class Log extends React.Component {
   static propTypes = {
@@ -58,10 +58,10 @@ export default class Log extends React.Component {
     }, () => this.fetchData())
   }
 
-  toggleForMe() {
+  async toggleForMe() {
     const { accountAddress } = this.props
     if (!accountAddress) {
-      return alert(NO_WALLET_ALERT)
+      await connectWallet()
     }
     const { onlyForMe } = this.state
     this.setState( {
@@ -84,10 +84,10 @@ export default class Log extends React.Component {
     }, () => this.fetchData())
   }
 
-  toggleByMe() {
+  async toggleByMe() {
     const { accountAddress } = this.props
     if (!accountAddress) {
-      return alert(NO_WALLET_ALERT)
+      await connectWallet()
     }
     const { onlyByMe } = this.state
     this.setState( {

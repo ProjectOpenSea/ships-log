@@ -2,30 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Log from '../Log'
 import { OpenSeaPort, Network } from 'opensea-js';
-import { web3Provider, OPENSEA_JS_URL, GITHUB_URL } from '../../constants';
-
-const Header = styled.header`
-  border-bottom: 1px solid lightgrey;
-  padding: 10px;
-  text-align: center;
-  background-color: #f4f9fd;
-
-  h6 img {
-    width: 24px;
-  }
-`
-
-const ImgRibbon = styled.img`
-  width: 150px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  border: 0;
-
-  @media(max-width: 600px) {
-    width: 80px;
-  }
-`
+import { web3Provider, onNetworkUpdate, OPENSEA_JS_URL, GITHUB_URL } from '../../constants';
 
 export default class App extends React.Component {
 
@@ -35,14 +12,16 @@ export default class App extends React.Component {
 
   constructor(props) {
     super(props)
+    this.onChangeAddress()
+    onNetworkUpdate(this.onChangeAddress)
+  }
+
+  onChangeAddress = () => {
     this.seaport = new OpenSeaPort(web3Provider, {
       networkName: Network.Main
     })
     this.web3 = this.seaport.web3
-  }
-
-  componentDidMount() {
-    this.accountAddress = this.web3.eth.getAccounts((err, res) => {
+    this.web3.eth.getAccounts((err, res) => {
       this.setState({
         accountAddress: res[0]
       })
@@ -74,3 +53,26 @@ export default class App extends React.Component {
     )
   }
 }
+
+const Header = styled.header`
+  border-bottom: 1px solid lightgrey;
+  padding: 10px;
+  text-align: center;
+  background-color: #f4f9fd;
+
+  h6 img {
+    width: 24px;
+  }
+`
+
+const ImgRibbon = styled.img`
+  width: 150px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+
+  @media(max-width: 600px) {
+    width: 80px;
+  }
+`
