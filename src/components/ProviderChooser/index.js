@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
-import Portis from "@portis/web3";
+import { getPortis } from "../../constants";
 
 const Providers = styled.div`
   display: flex;
@@ -49,11 +49,7 @@ export default class ProviderChooser extends React.Component {
   async initProvider(providerName) {
     let provider;
     if (providerName === "portis") {
-      const portis = new Portis(
-        "9d2d981f-d311-4a5d-97e4-d6ea8a7422c8",
-        "mainnet"
-      );
-      provider = portis.provider;
+      provider = getPortis().provider;
     } else {
       provider = window.ethereum;
     }

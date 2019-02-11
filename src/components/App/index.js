@@ -6,6 +6,7 @@ import { OPENSEA_JS_URL, GITHUB_URL } from "../../constants";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProviderChooser from "../ProviderChooser";
+import Wallet from '../Wallet'
 
 const Header = styled.header`
   border-bottom: 1px solid lightgrey;
@@ -57,6 +58,7 @@ export default class App extends React.Component {
           />
         </a>
         <Header>
+          <Wallet></Wallet>
           <h1>The Ship's Log</h1>
           <h6>
             <a target="_blank" rel="noopener noreferrer" href={OPENSEA_JS_URL}>
