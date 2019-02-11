@@ -30,14 +30,15 @@ export default class Log extends React.Component {
       maker: this.state.onlyByMe ? accountAddress : undefined,
       owner: this.state.onlyForMe ? accountAddress : undefined,
       side: this.state.side,
-      bundled: this.state.onlyBundles ? true : undefined
+      bundled: this.state.onlyBundles ? true : undefined,
+      payment_token_address: '0x0000000000000000000000000000000000000000'
       // Possible query options:
       // 'asset_contract_address'
       // 'taker'
       // 'token_id'
       // 'token_ids'
       // 'sale_kind'
-      
+
     }, this.state.page)
 
     this.setState({ orders, total: count })
@@ -167,7 +168,7 @@ export default class Log extends React.Component {
         {this.renderFilters()}
 
         {orders != null
-        
+
           ? <React.Fragment>
               <div className="card-deck">
                 {orders.map((order, i) => {

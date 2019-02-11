@@ -1,4 +1,3 @@
-import Portis from '@portis/web3';
 import BigNumber from 'bignumber.js';
 
 export const GOOGLE_ANALYTICS_ID = 'UA-111688253-4'
@@ -6,9 +5,6 @@ export const OPENSEA_URL = "https://opensea.io"
 export const OPENSEA_JS_URL = "https://github.com/ProjectOpenSea/opensea-js"
 export const GITHUB_URL = "https://github.com/ProjectOpenSea/ships-log"
 export const DEFAULT_DECIMALS = 18
-
-const portis = new Portis('9d2d981f-d311-4a5d-97e4-d6ea8a7422c8', 'mainnet');
-export const web3Provider = portis.provider;
 
 export function toUnitAmount(baseAmount, tokenContract = null) {
   const decimals = tokenContract && tokenContract.decimals != null
