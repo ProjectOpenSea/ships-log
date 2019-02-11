@@ -31,6 +31,10 @@ const DropdownList = styled.div`
       background-color: aliceblue;
     }
   }
+
+  .open-wallet {
+    cursor: pointer;
+  }
 `;
 
 export default class Wallet extends React.Component {
@@ -55,17 +59,17 @@ export default class Wallet extends React.Component {
             <Dropdown
               onClick={() => this.setState({ visible: !this.state.visible })}
             >
-              {this.state.address.substring(0, 5)}...
+              🔑 {this.state.address.substring(0, 5)}...
               {this.state.address.substring(this.state.address.length - 3)}
             </Dropdown>
             {this.state.visible && (
               <DropdownList>
-                <div>{this.state.address}</div>
+                <div>🔑 {this.state.address}</div>
+                {this.state.email && <div>✉️ {this.state.email}</div>}
                 {this.state.email && (
-                  <div>Logged in as: {this.state.email}</div>
-                )}
-                {this.state.email && (
-                  <div onClick={this.openWallet}>Open Wallet</div>
+                  <div className="open-wallet" onClick={this.openWallet}>
+                    🚀 Open Wallet
+                  </div>
                 )}
               </DropdownList>
             )}
