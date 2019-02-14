@@ -10,7 +10,7 @@ let portis;
 
 export function getPortis() {
   if (!portis) {
-    portis = new Portis("9d2d981f-d311-4a5d-97e4-d6ea8a7422c8", "mainnet", {
+    portis = new Portis("9d612e80-7d39-43dc-a772-7c7daf75d2ed", "mainnet", {
       scope: ["email"]
     });
   }
