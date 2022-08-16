@@ -54,8 +54,6 @@ And here's the one-line call for buying an asset:
 await this.props.seaport.fulfillOrder({ order: this.props.order, accountAddress })
 ```
 
-If you have any questions, drop us a note any time in [Discord](https://discord.gg/XjwWYgU) in the #developers channel!
-
 ### Deploying to Heroku
 
 The create-react-app buildpack has issues finding dependencies during the build phase. To work around those, you can do `npm run eject` and deploy a node app, or you can deploy a pure, static site:
